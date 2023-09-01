@@ -1,10 +1,10 @@
-name: Bug Report
-description: File a bug report
+name: Cross Reference Issue
+description: Reference an Issue from another repository
 title: "[Bug]: "
-labels: ["bug", "triage"]
-projects: ["octo-org/1", "octo-org/44"]
+labels: ["issue"]
+projects: ["prhsag/beta", "octo-org/44"]
 assignees:
-  - octocat
+  - prhsag
 body:
   - type: markdown
     attributes:
@@ -28,13 +28,13 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: version
+    id: repo
     attributes:
-      label: Version
-      description: What version of our software are you running?
+      label: Repository
+      description: Which external repository does this refer?
       options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
+        - prhsag/beta
+        - prhsag/alpha
       default: 0
     validations:
       required: true
