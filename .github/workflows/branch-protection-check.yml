@@ -1,44 +1,50 @@
-name: Check Branch Protection
+name: Check Main Branch Protection
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'  # Run daily
+    - cron: '0 0 * * *' # Schedule the workflow to run daily (adjust as needed)
 
 jobs:
   check-branch-protection:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Check branch protection
-      id: check-protection
-      run: |
-        Use GitHub Script to check branch protection status
-        const github = require('@actions/github');
-        const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-        // Replace 'main' with your default branch name
-        const branch = 'main';
-        const owner = process.env.GITHUB_REPOSITORY.split('/')[0];
-        const repo = process.env.GITHUB_REPOSITORY.split('/')[1];
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          sudo apt-add-repository https://cli.github.com/packages
+          sudo apt update
+          sudo apt install gh
 
-        octokit.repos.getBranchProtection({
-          owner,
-          repo,
-          branch
-        }).then(response => {
-          if (!response.data.enabled) {
-            // Create an issue if branch protection is missing
-            octokit.issues.create({
-              owner,
-              repo,
-              title: 'Missing Branch Protection',
-              body: `The ${branch} branch does not have branch protection enabled.`,
-            });
-          }
-        });
+      - name: Check Branch Protection
+        id: branch-protection
+        run: |
+          # Get the repository owner and name
+          repo=$(echo "$GITHUB_REPOSITORY" | awk -F/ '{print $2}')
+          owner=$(echo "$GITHUB_REPOSITORY" | awk -F/ '{print $1}')
 
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Check if the main branch is protected
+          if gh api repos/$owner/$repo/branches/main/protection -q '.message' 2>&1 | grep -q 'Not Found'; then
+            echo "Main branch is not protected."
+            echo "::set-output name=protected::false"
+          else
+            echo "Main branch is protected."
+            echo "::set-output name=protected::true"
+          fi
+
+      - name: Create Issue if Main Branch is Not Protected
+        if: steps.branch-protection.outputs.protected == 'false'
+        run: |
+          echo "Main branch is not protected. Please protect the main branch to ensure code quality and security." | gh issue create --title "Main Branch Protection" --body -
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
