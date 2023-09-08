@@ -1,0 +1,44 @@
+name: Check Branch Protection
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily
+
+jobs:
+  check-branch-protection:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check branch protection
+      id: check-protection
+      run: |
+        # Use GitHub Script to check branch protection status
+        const github = require('@actions/github');
+        const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
+
+        // Replace 'main' with your default branch name
+        const branch = 'main';
+        const owner = process.env.GITHUB_REPOSITORY.split('/')[0];
+        const repo = process.env.GITHUB_REPOSITORY.split('/')[1];
+
+        octokit.repos.getBranchProtection({
+          owner,
+          repo,
+          branch
+        }).then(response => {
+          if (!response.data.enabled) {
+            // Create an issue if branch protection is missing
+            octokit.issues.create({
+              owner,
+              repo,
+              title: 'Missing Branch Protection',
+              body: `The ${branch} branch does not have branch protection enabled.`,
+            });
+          }
+        });
+
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
