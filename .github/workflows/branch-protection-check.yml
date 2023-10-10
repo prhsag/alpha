@@ -1,6 +1,7 @@
 name: Check Main Branch Protection
 
 on: push
+  workflow_dispatch:
 
 jobs:
   check-branch-protection:
