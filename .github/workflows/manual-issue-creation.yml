@@ -1,4 +1,4 @@
-name: Create issue manually
+name: Create Issue manually
 
 on:
   workflow_call:
@@ -20,7 +20,7 @@ on:
         required: true
 
 jobs:
-  create_issue_on_failure:
+  create_issue_manually:
     runs-on: ubuntu-latest
     
     permissions:
