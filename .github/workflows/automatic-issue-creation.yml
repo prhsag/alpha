@@ -18,8 +18,9 @@ jobs:
         echo "Push event detected. Creating an issue..."
         body="Push event detected by GitHub Actions."
         title="Push Event on Branch: ${{ github.ref }}"
+        echo "Title: $title"
 
-        # Use the GitHub API to create an issue
+        
         issue_url=$(curl -X POST \
           -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
@@ -31,7 +32,6 @@ jobs:
 
         echo "Issue created: $issue_url"
         
-        # You can add more logic here if needed.
 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
