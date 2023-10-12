@@ -1,0 +1,47 @@
+name: Create issue manually
+
+on:
+  workflow_call:
+    inputs:
+      title:
+        required: true
+        type: string
+      body:
+        required: true
+        type: string 
+  
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'Issue Title'
+        required: true
+      body:
+        description: 'Issue body'
+        required: true
+
+jobs:
+  create_issue_on_failure:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      issues: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Crete issue using REST API
+      id: create-issue
+      run: |
+        curl --request POST \
+        --url https://api.github.com/repos/${{ github.repository }}/issues \
+        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        --header 'content-type: application/json' \
+        --data '{
+           "title": "Manual issue for commit: ${{ github.sha }}",
+           "body": "This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+        }' \
+        --fail
+
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
