@@ -38,8 +38,8 @@ jobs:
         --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
         --header 'content-type: application/json' \
         --data '{
-           "title": "Manual issue for commit: ${{ github.sha }}",
-           "body": "This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+           "title": "Manual issue for commit: ${{ github.sha }} Failure: ${{ inputs.title }}",
+           "body": "Details: ${{ inputs.body }}. \n\n This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
         }' \
         --fail
 
