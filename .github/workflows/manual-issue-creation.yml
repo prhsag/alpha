@@ -18,6 +18,16 @@ on:
       body:
         description: 'Issue body'
         required: true
+      assignees:
+        description: 'Assignees'
+        required: true
+      labels:
+        description: 'Labels'
+        required: true
+        type: choice
+        options:
+          - failed-test-case
+        
 
 jobs:
   create_issue_manually:
@@ -39,7 +49,9 @@ jobs:
         --header 'content-type: application/json' \
         --data '{
            "title": "Manual issue for commit: ${{ github.sha }} Failure: ${{ inputs.title }}",
-           "body": "Details: ${{ inputs.body }}. \n\n This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+           "body": "Details: ${{ inputs.body }}. \n\n This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_.",
+           "assignees":[${{ inputs.assignees }}],
+           "labels":[${{ inputs.labels }}]
         }' \
         --fail
 
