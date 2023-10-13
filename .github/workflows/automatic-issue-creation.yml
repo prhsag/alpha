@@ -76,10 +76,3 @@ jobs:
   call-workflow:
     uses: prhsag/alpha/.github/workflows/reusable-issue-workflow.yml@main
 
-  # call-another-workflow:
-  #   runs-on: ubuntu-latest
-
-  #   permissions:
-  #       issues: write
-
-  #   uses: prhsag/alpha/.github/workflows/reusable-issue-workflow.yml@main
