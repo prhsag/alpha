@@ -74,4 +74,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   call-another-workflow:
-    uses: alpha/.github/workflows/reusable-issue-workflow.yml@main
+    uses: prhsag/alpha/.github/workflows/reusable-issue-workflow.yml@main
