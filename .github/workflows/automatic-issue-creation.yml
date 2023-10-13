@@ -72,5 +72,6 @@ jobs:
 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
   call-another-workflow:
     uses: reusable-issue-workflow.yml@main
