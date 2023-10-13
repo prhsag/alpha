@@ -6,6 +6,9 @@ on:
 
 jobs:
   call-workflow:
+    permissions:
+        issues: write
+
     uses: prhsag/alpha/.github/workflows/reusable-issue-workflow.yml@main
 
   create-issue-automatically:
