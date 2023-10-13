@@ -74,4 +74,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   call-another-workflow:
+    runs-on: ubuntu-latest
+
+    permissions:
+        issues: write
+        
     uses: prhsag/alpha/.github/workflows/reusable-issue-workflow.yml@main
