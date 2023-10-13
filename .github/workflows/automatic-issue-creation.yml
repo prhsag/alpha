@@ -73,6 +73,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # call-workflow:
-  #   uses: prhsag/alpha/.github/workflows/reusable-issue-workflow.yml@main
+  call-workflow:
+    uses: prhsag/alpha/.github/workflows/reusable-issue-workflow.yml@main
 
