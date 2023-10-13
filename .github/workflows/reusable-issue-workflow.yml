@@ -1,0 +1,32 @@
+name: Create Issue from Workflow Call
+
+on:
+  workflow_call:
+
+
+jobs:
+  create-issue-from-workflow:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      issues: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Create Issue from Workflow
+      uses: actions/checkout@v2
+      run: |
+        curl --request POST \
+        --url https://api.github.com/repos/${{ github.repository }}/issues \
+        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        --header 'content-type: application/json' \
+        --data '{
+           "title": "Workflow issue for commit: ${{ github.sha }}",
+           "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_.",
+           "labels": ["failed-test-case"]
+        }' \
+        --fail
+
+    

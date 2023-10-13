@@ -1,6 +1,0 @@
-name: Create Ticket in JIRA
-
-on: push
-
-jobs:
-  build:
