@@ -6,7 +6,9 @@ on:
 
 jobs:
   create-issue-automatically:
+    uses: prhsag/alpha/.github/workflows/reusable-issue-workflow.yml@main
     runs-on: ubuntu-latest
+
 
     permissions:
         issues: write
@@ -73,8 +75,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Call Workflow
-      uses: prhsag/alpha/.github/workflows/reusable-issue-workflow.yml@main
+    
   # call-another-workflow:
   #   runs-on: ubuntu-latest
 
