@@ -4,12 +4,12 @@ on:
     workflow_dispatch:
         inputs:
           project:
-            type: choice
+            type: string
             required: true
             description: 'Project Name'
-            options:
-              - AIMT
-              - wM
+            # options:
+            #   - AIMT
+            #   - wM
           summary:
             type: string
             required: true
@@ -29,14 +29,12 @@ on:
               - '2-High'
               - '3-Medium'
               - '4-Low'
-          dev_portal_cloud:
-            type: boolean
+          components:
+            type: string
+            description: 'Components'
             required: false
-            description: 'Dev_Portal_Cloud'
-          dev_portal_documentation:
-            type: boolean
-            required: false
-            description: 'Dev_Portal_Documentation'
+            
+
             
 
 
