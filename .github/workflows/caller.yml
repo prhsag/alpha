@@ -1,0 +1,9 @@
+name: Calling called.yml in Beta Repository
+
+on:
+    workflow_dispatch: 
+
+jobs:
+    call_workflow:
+
+        uses: prhsag/beta/blob/main/.github/workflows/called.yml
