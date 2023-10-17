@@ -1,4 +1,4 @@
-name: Calling wokrflow in Beta Repository
+name: Calling workflow in Beta Repository
 
 on:
     workflow_dispatch: 
