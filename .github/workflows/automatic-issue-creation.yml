@@ -1,4 +1,4 @@
-name: Create Issue on Push
+name: Create Issue on Call
 
 on:
   workflow_call: 
