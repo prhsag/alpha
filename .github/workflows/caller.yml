@@ -6,4 +6,4 @@ on:
 jobs:
     call_workflow:
 
-        uses: prhsag/beta/blob/main/.github/workflows/called.yml
+        uses: prhsag/beta/blob/main/.github/workflows/called.yml@main
