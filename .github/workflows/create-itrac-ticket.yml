@@ -29,6 +29,16 @@ on:
               - '2-High'
               - '3-Medium'
               - '4-Low'
+          dev_portal_cloud:
+            type: boolean
+            required: false
+            description: 'Dev_Portal_Cloud'
+          dev_portal_documentation:
+            type: boolean
+            required: false
+            description: 'Dev_Portal_Documentation'
+            
+
 
 jobs:
     create-itrac-ticket:
