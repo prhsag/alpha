@@ -10,6 +10,14 @@ on:
             options:
               - AIMT
               - wM
+          summary:
+            type: string
+            required: true
+            description: 'Summary'
+          description:
+            type: string
+            required: true
+            description: 'Description'
           priority:
             type: choice
             required: false
