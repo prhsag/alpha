@@ -1,15 +1,6 @@
 name: Create Issue manually
 
 on:
-  workflow_call:
-    inputs:
-      title:
-        required: true
-        type: string
-      body:
-        required: true
-        type: string 
-  
   workflow_dispatch:
     inputs:
       owner:
@@ -41,14 +32,12 @@ jobs:
       issues: write
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    # - name: Checkout code
+    #   uses: actions/checkout@v2
 
     - name: Create issue using REST API
       id: create-issue
       run: |
-        input_string="apple,banana,cherry,date"
-        
         IFS=','
         
         read -a my_array <<< "${{inputs.labels}}"
