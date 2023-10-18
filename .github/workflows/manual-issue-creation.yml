@@ -63,7 +63,7 @@ jobs:
            "title": "Manual issue for repo: ${{ inputs.owner }}/${{ inputs.repo-name }} Title: ${{ inputs.title }}",
            "body": "Details: ${{ inputs.body }}. \n\n This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**.",
            "assignees":["${{ inputs.assignees }}"],
-           "labels":$output_string
+          #  "labels": $output_string
         }' \
         --fail
 
