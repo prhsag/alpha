@@ -1,37 +1,35 @@
-name: Create Issue manually
+name: Create Issue in Repository
 
 on:
   workflow_call:
+    secrets:
+      token:
+        required: true
     inputs:
-      title:
-        required: true
-        type: string
-      body:
-        required: true
-        type: string 
-  
-  workflow_dispatch:
-    inputs:
-      owner:
-        description: 'Repository Owner'
-        required: true
-      repo-name:
-        description: 'Repository Name'
-        required: true
-      title:
-        description: 'Issue Title'
-        required: true
-      body:
-        description: 'Issue body'
-        required: true
-      assignees:
-        description: 'Assignees'
-        required: true
-      labels:
-        description: 'Labels (CSV)'
-        required: false
-        type: string
-        
+        owner:
+            description: 'Repository Owner'
+            required: true
+            type: string
+        repo-name:
+            description: 'Repository Name'
+            required: true
+            type: string
+        title:
+            description: 'Issue Title'
+            required: true
+            type: string
+        body:
+            description: 'Issue body'
+            required: true
+            type: string
+        assignees:
+            description: 'Assignees'
+            required: true
+            type: string
+        labels:
+            description: 'Labels (CSV)'
+            required: false
+            type: string
 
 jobs:
   create_issue_manually:
@@ -47,7 +45,6 @@ jobs:
     - name: Create issue using REST API
       id: create-issue
       run: |
-        input_string="apple,banana,cherry,date"
         
         IFS=','
         
