@@ -1,0 +1,60 @@
+name: Update Cloned Itrac Ticket Manually
+
+on:
+    workflow_dispatch:
+        inputs:
+          project_url:
+            type: string
+            required: true
+            description: 'Project URL'
+            default: 'https://itrac.eur.ad.sag/rest/api/2/issue/AIMT-319'
+          input_json:
+            type: string
+            required: true
+            description: 'Input JSON'
+            default: '{
+              "fields": {
+                  "project": {
+                      "key": "AIMT"
+                  },
+                  "issuetype": {
+                      "name": "Ticket"
+                  }
+              },
+              "update": {
+                  "labels": [
+                      {
+                          "add": "triaged"
+                      },
+                      {
+                          "remove": "blocker"
+                      }
+                  ],
+                  "summary": [
+                      {
+                          "set": "Bug in business logic"
+                      }
+                  ]
+                }
+              }'
+          
+          
+
+jobs:
+    create-itrac-ticket:
+        runs-on: linux
+
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: PUT Request iTrac Ticket from GitHub
+          id: create-ticket
+          run: |
+            curl --location --request PUT 'https://itrac.eur.ad.sag/rest/api/2/issue/AIMT-319' \
+            --header 'Content-Type: application/json' \
+            --header 'Authorization: Bearer MTkyNzgzMDI2MTgxOiiSNv4rS88DmyDYX/70gi45AZvC' \
+            --header 'Cookie: BIGipServer~Applications~daedcitrac-6n-https=4029158666.47873.0000; JSESSIONID=F59A220F6288E33B17EED8C10431B07A; atlassian.xsrf.token=A43D-AIQO-WSRD-C01F_92f27b4721be4fee5662503f82be156d0a9828d1_lin' \
+            --data ${{inputs.input_json}}
+
+          
