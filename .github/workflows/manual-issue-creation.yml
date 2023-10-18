@@ -32,8 +32,8 @@ jobs:
       issues: write
 
     steps:
-    # - name: Checkout code
-    #   uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Create issue using REST API
       id: create-issue
