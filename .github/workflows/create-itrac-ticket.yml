@@ -18,6 +18,24 @@ on:
             type: string
             required: true
             description: 'Description'
+          issue_type:
+            type: choice
+            required: true
+            default: 'Defect'
+            description: 'Issue Type'
+            options:
+              - 'Defect'
+          severity:
+            type: choice
+            required: true
+            default: 'None'
+            description: 'Severity'
+            options:
+              - 'None'  
+              - '1-Critical'
+              - '2-High'
+              - '3-Medium'
+              - '4-Low'
           priority:
             type: choice
             required: false
@@ -29,14 +47,57 @@ on:
               - '2-High'
               - '3-Medium'
               - '4-Low'
+          sub-type:
+            type: choice
+            required: false
+            default: 'Bug'
+            description: 'Sub-Type'
+            options:
+              - 'Bug'  
+              - 'Enhancement'  
+              - 'Documentation'                
+          error-codes:
+            type: string
+            description: 'Error Codes'
+            required: false
+          reproducing_steps:
+            type: string
+            description: 'Reproduciing Steps'
+            required: false
+          security:
+            type: boolean
+            default: false
+            description: 'Security'
+            required: false
+          cloud:
+            type: boolean
+            default: false
+            description: 'Cloud'
+            required: false
+          product-code:
+            type: string
+            description: 'Product Code'
+            required: true
+          reported-version:
+            type: string
+            description: 'Reported Version'
+            required: true
+          reported-build:
+            type: string
+            description: 'Reported Build'
+            required: true
+          environment:
+            type: string
+            description: 'Environment'
+            required: false
+          labels:
+            type: string
+            description: 'Labels'
+            required: false
           components:
             type: string
             description: 'Components'
             required: false
-            
-
-            
-
 
 jobs:
     create-itrac-ticket:
@@ -54,6 +115,14 @@ jobs:
             --header 'Content-Type: application/json' \
             --header 'Authorization: Bearer MTkyNzgzMDI2MTgxOiiSNv4rS88DmyDYX/70gi45AZvC' \
             --header 'Cookie: BIGipServer~Applications~daedcitrac-6n-https=2334856458.47873.0000; JSESSIONID=AF385425F87155491571C12F0148F81B; atlassian.xsrf.token=A43D-AIQO-WSRD-C01F_4de74c6d2e606689caf96616855e3b038e4c48e9_lin' \
-            --data '{ "fields": { "project": { "key": "AIMT" }, "summary": "[Ignore] - Ticket from iTrac REST API", "description": "This issue is created using iTrac REST API", "issuetype": { "name": "Ticket" } } }'
+            --data '{ 
+                "fields": { 
+                    "project": { "key": "AIMT" }, 
+                    "summary": "${{ inputs.summary }}", 
+                    "description": "${{ inputs.description }}", 
+                    "issuetype": { "name": "${{ inputs.issue_type }}" },
+                    "priority": { "name": "${{ inputs.priority }}" } 
+                    } 
+                }'
 
           

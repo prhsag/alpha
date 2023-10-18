@@ -23,7 +23,7 @@ on:
         required: true
       labels:
         description: 'Labels'
-        required: true
+        required: false
         type: choice
         options:
           - failed-test-case
