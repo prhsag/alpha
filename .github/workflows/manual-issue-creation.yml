@@ -38,22 +38,7 @@ jobs:
     - name: Create issue using REST API
       id: create-issue
       run: |
-        IFS=','
         
-        read -a my_array <<< "${{inputs.labels}}"
-        
-        IFS=' '
-        
-        output_string="["
-        
-        for element in "${my_array[@]}"
-        do
-            output_string+="\"$element\","
-        done
-        
-        output_string="${output_string%,}]"
-
-        # echo $output_string
 
         curl --request POST \
         --url https://api.github.com/repos/${{ github.repository }}/issues \
