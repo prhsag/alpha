@@ -2,17 +2,14 @@
 name: Create Issue manually
 
 on:
-  workflow_call:
-    inputs:
-      title:
-        required: true
-        type: string
-      body:
-        required: true
-        type: string 
-  
   workflow_dispatch:
     inputs:
+      owner:
+        description: 'Repository Owner'
+        required: true
+      repo-name:
+        description: 'Repository Name'
+        required: true
       title:
         description: 'Issue Title'
         required: true
@@ -23,11 +20,9 @@ on:
         description: 'Assignees'
         required: true
       labels:
-        description: 'Labels'
-        required: true
-        type: choice
-        options:
-          - failed-test-case
+        description: 'Labels (CSV)'
+        required: false
+        type: string
         
 
 jobs:
