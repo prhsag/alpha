@@ -44,32 +44,27 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Crete issue using REST API
+    - name: Create issue using REST API
       id: create-issue
       run: |
-        # Input string
         input_string="apple,banana,cherry,date"
         
-        # Set the IFS to a comma to split the string
         IFS=','
         
-        # Read the input string into an array
         read -a my_array <<< "${{inputs.labels}}"
         
-        # Reset IFS to its default value
         IFS=' '
         
-        # Initialize an empty string for the output
         output_string="["
         
-        # Loop through the array elements to construct the output string
         for element in "${my_array[@]}"
         do
             output_string+="\"$element\","
         done
         
-        # Remove the trailing comma and close the square bracket
         output_string="${output_string%,}]"
+
+        echo $output_string
 
         curl --request POST \
         --url https://api.github.com/repos/${{ inputs.owner }}/${{ inputs.repo-name }}/issues \
