@@ -7,7 +7,7 @@ on:
       owner:
         description: 'Repository Owner'
         required: true
-      repo-name:
+      repo_name:
         description: 'Repository Name'
         required: true
       title:
@@ -36,7 +36,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Crete issue using REST API
+    - name: Create issue using REST API
       id: create-issue
       run: |
         curl --request POST \
@@ -44,7 +44,7 @@ jobs:
         --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
         --header 'content-type: application/json' \
         --data '{
-           "title": "Manual issue for commit: ${{ github.sha }} Failure: ${{ inputs.title }}",
+           "title": "Manual issue for repository: ${{ inputs.owner }}/${{ inputs.repo_name }}. \n\n Title: ${{ inputs.title }}",
            "body": "Details: ${{ inputs.body }}. \n\n This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_.",
            "assignees":["${{ inputs.assignees }}"],
            "labels":["${{ inputs.labels }}"]
