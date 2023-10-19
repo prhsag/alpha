@@ -55,6 +55,6 @@ jobs:
             --header 'Content-Type: application/json' \
             --header 'Authorization: Bearer MTkyNzgzMDI2MTgxOiiSNv4rS88DmyDYX/70gi45AZvC' \
             --header 'Cookie: BIGipServer~Applications~daedcitrac-6n-https=4029158666.47873.0000; JSESSIONID=F59A220F6288E33B17EED8C10431B07A; atlassian.xsrf.token=A43D-AIQO-WSRD-C01F_92f27b4721be4fee5662503f82be156d0a9828d1_lin' \
-            --data ${{inputs.input_json}}
+            --data ${{ inputs.input_json }}
 
           

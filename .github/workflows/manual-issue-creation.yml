@@ -45,7 +45,9 @@ jobs:
         --header 'content-type: application/json' \
         --data '{
            "title": "Manual issue for repository ${{ inputs.owner }}/${{ inputs.repo_name }} \n\n Title: ${{ inputs.title }}",
-           "body": "Details: ${{ inputs.body }}. \n\n This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_.",
+           "body": "Details: ${{ inputs.body }}. \n\n This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**. \n\n 
+           The commit hash was: _${{ github.sha }}_. \n\n Initiated by ${{github.actor}}",
+
            "assignees":["${{ inputs.assignees }}"],
            "labels":["failed-test-case"]
         }' \
