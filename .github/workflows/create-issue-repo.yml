@@ -42,38 +42,41 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Create issue using REST API
-      id: create-issue
-      run: |
+    # - name: Create issue using REST API
+    #   id: create-issue
+    #   run: |
         
-        IFS=','
+    #     IFS=','
         
-        read -a my_array <<< "${{inputs.labels}}"
+    #     read -a my_array <<< "${{inputs.labels}}"
         
-        IFS=' '
+    #     IFS=' '
         
-        output_string="["
+    #     output_string="["
         
-        for element in "${my_array[@]}"
-        do
-            output_string+="\"$element\","
-        done
+    #     for element in "${my_array[@]}"
+    #     do
+    #         output_string+="\"$element\","
+    #     done
         
-        output_string="${output_string%,}]"
+    #     output_string="${output_string%,}]"
 
-        echo $output_string
+    #     echo $output_string
 
-        curl --request POST \
-        --url https://api.github.com/repos/${{ inputs.owner }}/${{ inputs.repo-name }}/issues \
-        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-        --header 'content-type: application/json' \
-        --data '{
-           "title": "Manual issue for repo: ${{ inputs.owner }}/${{ inputs.repo-name }} Title: ${{ inputs.title }}",
-           "body": "Details: ${{ inputs.body }}. \n\n This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**.",
-           "assignees":["${{ inputs.assignees }}"],
-           "labels":$output_string
-        }' \
-        --fail
+    #     curl --request POST \
+    #     --url https://api.github.com/repos/${{ inputs.owner }}/${{ inputs.repo-name }}/issues \
+    #     --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+    #     --header 'content-type: application/json' \
+    #     --data '{
+    #        "title": "Manual issue for repo: ${{ inputs.owner }}/${{ inputs.repo-name }} Title: ${{ inputs.title }}",
+    #        "body": "Details: ${{ inputs.body }}. \n\n This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**.",
+    #        "assignees":["${{ inputs.assignees }}"],
+    #        "labels":$output_string
+    #     }' \
+    #     --fail
 
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        
+        

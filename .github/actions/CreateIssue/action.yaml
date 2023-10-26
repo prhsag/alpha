@@ -1,0 +1,28 @@
+name: Create Issue using GitHub REST API
+description: Reusable workflow to create issue from inputs
+
+inputs:
+  owner:
+    description: 'Repository Owner'
+    required: true
+  repo_name:
+    description: 'Repository Name'
+    required: true
+  title:
+    description: 'Issue Title'
+    required: true
+  body:
+    description: 'Issue body'
+    required: true
+  assignees:
+    description: 'Assignees'
+    required: true
+  labels:
+    description: 'Labels (CSV)'
+    required: false
+
+runs:
+  using: node20
+  main: dist/index.js
+         
+
