@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "rootDir": "./",
-    "moduleResolution": "NodeNext",
-    "baseUrl": "./",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "noImplicitAny": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "es2019",
+    "module": "commonjs",
     "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "newLine": "lf"
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "lib": ["esnext"]
   },
-  "exclude": ["./dist", "./node_modules", "./__tests__", "./coverage"]
+  "references": [
+    {
+      "path": "./tsconfig.build.json"
+    }
+  ],
+  "exclude": ["node_modules"]
 }
