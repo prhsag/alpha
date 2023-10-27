@@ -1,5 +1,5 @@
-import * as core from "@actions/core";
-import { Octokit } from "octokit";
+const core = require("@actions/core");
+const Oktokit =require("octokit");
 
 const octokit = new Octokit({ auth: process.env.TOKEN_PAT });
 
