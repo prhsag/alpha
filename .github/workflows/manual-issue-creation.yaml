@@ -56,7 +56,7 @@ jobs:
     #     GITHUB_TOKEN: ${{ secrets.TOKEN_PAT }}
 
     - name: Create Issue using REST API
-      uses: prhsag/alpha/.github/actions/CreateIssue
+      uses: prhsag/alpha/.github/actions/CreateIssue@main
       env:
         TOKEN_PAT: ${{ secrets.TOKEN_PAT }}
       with:
