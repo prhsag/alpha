@@ -5,7 +5,7 @@ const octokit = new Octokit({ auth: process.env.TOKEN_PAT });
 
 const createIssue  =async () => {
     try {
-        const data = await octokit.rest.issues.create({
+        const {data} = await octokit.rest.issues.create({
             owner: core.getInput("owner"),
             repo: core.getInput("repo_name"),
             title: core.getInput("title"),
@@ -14,6 +14,7 @@ const createIssue  =async () => {
             label: core.getInput("labels")
 
           });
+        console.log("🚀 ~ file: index.ts:17 ~ createIssue ~ data:", data)
     } catch (error) {
         const e = error as Error
         core.setFailed(e.message)
