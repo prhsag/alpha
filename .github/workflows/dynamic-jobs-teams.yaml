@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Create dynamic jobs
         id: dynamic-jobs
         run: |
@@ -43,5 +43,7 @@ jobs:
             gh workflow run $job_file
           done
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
   
 
