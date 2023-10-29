@@ -1,7 +1,7 @@
 name: Dynamic Jobs for Each Team
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       number-of-teams:
         description: 'Number of Teams'
