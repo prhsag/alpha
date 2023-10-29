@@ -42,25 +42,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # - name: Create issue using REST API
-    #   id: create-issue
-    #   run: |
-    #     curl --request POST \
-    #     --url https://api.github.com/repos/${{ inputs.owner }}/${{ inputs.repo_name }}/issues \
-    #     --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-    #     --header 'content-type: application/json' \
-    #     --data '{
-    #        "title": "Manual issue for repository ${{ inputs.owner }}/${{ inputs.repo_name }} \n\n Title: ${{ inputs.title }}",
-    #        "body": "Details: ${{ inputs.body }}. \n\n This issue was manually created by the GitHub Action workflow **${{ github.workflow }}**. \n\n 
-    #        The commit hash was: _${{ github.sha }}_. \n\n Initiated by ${{github.actor}}",
-
-    #        "assignees":["${{ inputs.assignees }}"],
-    #        "labels":["failed-test-case"]
-    #     }' \
-    #     --fail
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.TOKEN_PAT }}
-
     - name: Create Issue using REST API
       uses: prhsag/alpha/.github/actions/CreateIssue@main
       env:
