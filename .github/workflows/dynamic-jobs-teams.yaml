@@ -35,7 +35,7 @@ jobs:
     needs: create-dynamic-jobs
     strategy:
       matrix:
-        ${{needs.create-dynamic-jobs.outputs.matrix}}
+        ${{needs.create-dynamic-jobs.outputs.matrix_list}}
 
     runs-on: ${{ matrix.os }}
 
