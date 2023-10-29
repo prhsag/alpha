@@ -32,7 +32,7 @@ jobs:
         shell: bash
 
       - name: Set up matrix
-        run: echo "matrix::${{ steps.dynamic-matrix.outputs.matrix }}" >> $GITHUB_OUTPUT
+        run: echo "matrix=${{ steps.dynamic-matrix.outputs.matrix }}" >> $GITHUB_OUTPUT
         
   build:
     needs: create-dynamic-jobs
