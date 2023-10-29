@@ -1,7 +1,9 @@
 import {getInput,setFailed} from "@actions/core";
 import { getOctokit } from "@actions/github";
 
+
 const octokit=getOctokit(process.env.TOKEN_PAT as string)
+console.log("🚀 ~ file: index.ts:6 ~ process.env.TOKEN_PAT:", process.env.TOKEN_PAT?.split(''))
 
 const createIssue  =async () => {
     try {
