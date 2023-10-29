@@ -1,0 +1,44 @@
+name: Dynamic Jobs for Each Team
+
+on:
+  workflow_call:
+    inputs:
+      number-of-teams:
+        description: 'Number of Teams'
+        type: number
+        required: true
+
+jobs:
+  create-dynamic-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create dynamic jobs
+        id: dynamic-jobs
+        run: |
+          job_count="${{ github.event.inputs.job_count }}"
+          
+          for i in $(seq 1 $job_count); do
+            echo "Creating job $i"
+            echo "jobs:" >> $GITHUB_WORKSPACE/job-${i}.yml
+            echo "  job-$i:" >> $GITHUB_WORKSPACE/job-${i}.yml
+            echo "    runs-on: ubuntu-latest" >> $GITHUB_WORKSPACE/job-${i}.yml
+            echo "    steps:" >> $GITHUB_WORKSPACE/job-${i}.yml
+            echo "      - name: Job $i" >> $GITHUB_WORKSPACE/job-${i}.yml
+            echo "        run: |" >> $GITHUB_WORKSPACE/job-${i}.yml
+            echo "          # Your job $i commands here" >> $GITHUB_WORKSPACE/job-${i}.yml
+          done
+          
+          echo "::set-output name=job_files::${GITHUB_WORKSPACE}/job-*.yml"
+        shell: bash
+
+      - name: Run dynamic jobs
+        id: run-jobs
+        run: |
+          job_files="${{ steps.dynamic-jobs.outputs.job_files }}"
+          for job_file in $job_files; do
+            echo "Running job from $job_file"
+            gh workflow run $job_file
+          done
+        shell: bash
+  
+
