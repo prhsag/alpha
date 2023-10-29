@@ -30092,14 +30092,12 @@ var __webpack_exports__ = {};
 "use strict";
 var exports = __webpack_exports__;
 
-var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
 const github_1 = __nccwpck_require__(5438);
-const octokit = (0, github_1.getOctokit)(process.env.TOKEN_PAT);
-console.log("🚀 ~ file: index.ts:6 ~ process.env.TOKEN_PAT:", (_a = process.env.TOKEN_PAT) === null || _a === void 0 ? void 0 : _a.split(''));
 const createIssue = async () => {
     var _a;
+    const octokit = (0, github_1.getOctokit)(process.env.TOKEN_PAT);
     try {
         const { data } = await octokit.rest.issues.create({
             owner: (0, core_1.getInput)("owner"),
