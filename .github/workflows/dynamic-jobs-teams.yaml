@@ -15,37 +15,33 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create dynamic jobs
-        id: dynamic-jobs
+      - name: Create dynamic matrix
+        id: dynamic-matrix
         run: |
           job_count="${{ github.event.inputs.number-of-teams }}"
-          
+          matrix_list=""
+
           for i in $(seq 1 $job_count); do
-            echo "Creating job $i"
-            echo "jobs:" >> $GITHUB_WORKSPACE/job-${i}.yaml
-            echo "  job-$i:" >> $GITHUB_WORKSPACE/job-${i}.yaml
-            echo "    runs-on: ubuntu-latest" >> $GITHUB_WORKSPACE/job-${i}.yaml
-            echo "    steps:" >> $GITHUB_WORKSPACE/job-${i}.yaml
-            echo "      - name: Job $i" >> $GITHUB_WORKSPACE/job-${i}.yaml
-            echo "        run: |" >> $GITHUB_WORKSPACE/job-${i}.yaml
-            echo "          # Your job $i commands here" >> $GITHUB_WORKSPACE/job-${i}.yaml
+            matrix_list="${matrix_list} os${i}=ubuntu-latest version${i}=${i} "
           done
 
-          echo $GITHUB_WORKSPACE
-          
-          echo "::set-output name=job_files::${GITHUB_WORKSPACE}/job-*.yaml"
+          echo "matrix_list::$matrix_list"
         shell: bash
 
-      - name: Run dynamic jobs
-        id: run-jobs
+      - name: Set up matrix
+        run: echo "::set-output name=matrix::${{ steps.dynamic-matrix.outputs.matrix }}"
+        
+  build:
+    needs: create-dynamic-jobs
+    strategy:
+      matrix:
+        ${{fromJson(needs.create-dynamic-jobs.outputs.matrix)}}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Build and test
         run: |
-          job_files="${{ steps.dynamic-jobs.outputs.job_files }}"
-          for job_file in $job_files; do
-            echo "Running job from $job_file"
-            gh workflow run $job_file
-          done
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+          echo "Running job version ${{ matrix.version }} on ${{ matrix.os }}"
+          # Your build and test commands for each job
 
