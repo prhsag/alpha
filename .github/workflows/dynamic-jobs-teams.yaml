@@ -18,20 +18,20 @@ jobs:
       - name: Create dynamic jobs
         id: dynamic-jobs
         run: |
-          job_count="${{ github.event.inputs.job_count }}"
+          job_count="${{ github.event.inputs.number-of-teams }}"
           
           for i in $(seq 1 $job_count); do
             echo "Creating job $i"
-            echo "jobs:" >> prhsag/alpha/.github/workflows/dynamic-job-${i}.yaml
-            echo "  job-$i:" >> prhsag/alpha/.github/workflows/dynamic-job-${i}.yaml
-            echo "    runs-on: ubuntu-latest" >> prhsag/alpha/.github/workflows/dynamic-job-${i}.yaml
-            echo "    steps:" >> prhsag/alpha/.github/workflows/dynamic-job-${i}.yaml
-            echo "      - name: Job $i" >> prhsag/alpha/.github/workflows/dynamic-job-${i}.yaml
-            echo "        run: |" >> prhsag/alpha/.github/workflows/dynamic-job-${i}.yaml
-            echo "          # Your job $i commands here" >> prhsag/alpha/.github/workflows/dynamic-job-${i}.yaml
+            echo "jobs:" >> $GITHUB_WORKSPACE/job-${i}.yaml
+            echo "  job-$i:" >> $GITHUB_WORKSPACE/job-${i}.yaml
+            echo "    runs-on: ubuntu-latest" >> $GITHUB_WORKSPACE/job-${i}.yaml
+            echo "    steps:" >> $GITHUB_WORKSPACE/job-${i}.yaml
+            echo "      - name: Job $i" >> $GITHUB_WORKSPACE/job-${i}.yaml
+            echo "        run: |" >> $GITHUB_WORKSPACE/job-${i}.yaml
+            echo "          # Your job $i commands here" >> $GITHUB_WORKSPACE/job-${i}.yaml
           done
 
-        
+          echo $GITHUB_WORKSPACE
           
           echo "::set-output name=job_files::${GITHUB_WORKSPACE}/job-*.yaml"
         shell: bash
