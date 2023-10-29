@@ -11,6 +11,9 @@ on:
 jobs:
   create-dynamic-jobs:
     runs-on: ubuntu-latest
+
+    outputs:
+      matrix_list: ${{ steps.dynamic-matrix.outputs.matrix}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -25,11 +28,8 @@ jobs:
             matrix_list="${matrix_list} os${i}=ubuntu-latest version${i}=${i} "
           done
 
-          echo "matrix_list::$matrix_list"
+          echo "matrix=$matrix_list" >> $GITHUB_OUTPUT
         shell: bash
-
-      - name: Set up matrix
-        run: echo "::set-output name=matrix::${{ steps.dynamic-matrix.outputs.matrix }}"
         
   build:
     needs: create-dynamic-jobs
