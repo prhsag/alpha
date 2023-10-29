@@ -30,6 +30,8 @@ jobs:
             echo "        run: |" >> $GITHUB_WORKSPACE/job-${i}.yml
             echo "          # Your job $i commands here" >> $GITHUB_WORKSPACE/job-${i}.yml
           done
+
+          echo $GITHUB_WORKSPACE
           
           echo "::set-output name=job_files::${GITHUB_WORKSPACE}/job-*.yml"
         shell: bash
@@ -44,6 +46,6 @@ jobs:
           done
         shell: bash
         env:
-          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
 
