@@ -1,3 +1,6 @@
-
 name: Action to check Go/NoGo
+description: Fail a whole pipeline if the result is NoGo
 
+runs:
+  using: node20
+  main: dist/index.js
