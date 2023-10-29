@@ -28,8 +28,11 @@ jobs:
             matrix_list="${matrix_list} os${i}=ubuntu-latest version${i}=${i} "
           done
 
-          echo "matrix=$matrix_list" >> $GITHUB_OUTPUT
+          echo "matrix_list::$matrix_list"
         shell: bash
+
+      - name: Set up matrix
+        run: echo "matrix::${{ steps.dynamic-matrix.outputs.matrix }}" >> $GITHUB_OUTPUT
         
   build:
     needs: create-dynamic-jobs
