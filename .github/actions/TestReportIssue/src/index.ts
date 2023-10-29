@@ -1,4 +1,4 @@
-import { setFailed } from "../../CreateIssue/dist";
+import {setFailed} from "@actions/core";
 import { testReport } from "./types";
 import axios from "axios";
 
