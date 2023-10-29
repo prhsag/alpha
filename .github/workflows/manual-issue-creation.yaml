@@ -7,22 +7,28 @@ on:
       owner:
         description: 'Repository Owner'
         required: true
+        default: prhsag
       repo_name:
         description: 'Repository Name'
         required: true
+        default: beta
       title:
         description: 'Issue Title'
         required: true
+        default: 'Test Issue from .ts action file'
       body:
         description: 'Issue body'
         required: true
+        default: 'This is manually created From prhsag/alpha using .ts file action'
       assignees:
         description: 'Assignees'
         required: true
+        default: prhsag
       labels:
         description: 'Labels (CSV)'
         required: false
         type: string
+        default: 'failed-test-case'
         
 
 jobs:

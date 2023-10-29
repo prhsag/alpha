@@ -1,23 +1,22 @@
-import * as core from "@actions/core";
-import { Octokit } from "octokit";
+import {getInput,setFailed} from "@actions/core";
+import { getOctokit } from "@actions/github";
 
-const octokit = new Octokit({ auth: process.env.TOKEN_PAT });
+const octokit=getOctokit(process.env.TOKEN_PAT as string)
 
 const createIssue  =async () => {
     try {
         const {data} = await octokit.rest.issues.create({
-            owner: core.getInput("owner"),
-            repo: core.getInput("repo_name"),
-            title: core.getInput("title"),
-            body: core.getInput("body"),
-            assignee: core.getInput("assignees"),
-            label: core.getInput("labels")
+            owner: getInput("owner"),
+            repo: getInput("repo_name"),
+            title: getInput("title"),
+            body: getInput("body"),
+            assignee: getInput("assignees"),
+            label: getInput("labels")
 
           });
         console.log("🚀 ~ file: index.ts:17 ~ createIssue ~ data:", data)
     } catch (error) {
-        const e = error as Error
-        core.setFailed(e.message)
+        setFailed((error as Error)?.message ?? 'Unknown error');
     }
 }
 
