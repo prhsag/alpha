@@ -14,24 +14,38 @@ jobs:
         uses: actions/checkout@v3
   
   second-job:
-    needs: first-job
+    needs: [first-job]
     name: Second Job
     uses: prhsag/alpha/.github/workflows/reusable-workflow-visualization.yaml@main
 
   third-job:
     needs: [first-job]
     name: Third Job
-
     runs-on: ubuntu-latest
     steps:
       - name: Display command
         run: |
           echo "A third job has run"
+  
+  fourth-job:
+    needs: [first-job]
+    name: Fourth Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+  
+  fifth-job:
+    needs: [first-job]
+    name: Fifth Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
   final-job:
-    needs: [second-job,third-job]
+    needs: [second-job,third-job,fourth-job,fifth-job]
     name: Final Job
-    
     runs-on: ubuntu-latest
     steps:
       - name: Display command
