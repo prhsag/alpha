@@ -1,0 +1,17 @@
+name: Pipeline visualization
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  first-job:
+    name: First Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Reuse another workflow
+        uses: prhsag/alpha/.github/workflows/reusable-workflow-visualization.yaml@main

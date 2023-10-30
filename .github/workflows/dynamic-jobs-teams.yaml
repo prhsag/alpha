@@ -3,9 +3,9 @@ name: Dynamic Jobs for Each Team
 on:
   workflow_dispatch:
     inputs:
-      number-of-teams:
-        description: 'Number of Teams'
-        type: number
+      input-teams:
+        description: 'Input Teams (CSV)'
+        type: string
         required: true
 
 jobs:
@@ -31,6 +31,7 @@ jobs:
         
   build:
     needs: create-dynamic-jobs
+    
 
     runs-on: ubuntu-latest
 

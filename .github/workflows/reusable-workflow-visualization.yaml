@@ -1,0 +1,17 @@
+name: Reused workflow to visualise
+
+on:
+  workflow_call:
+    
+jobs:
+  first-sub-job:
+    name: First Sub Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Echo Output
+        run: |
+          echo This is a reusable workflow
