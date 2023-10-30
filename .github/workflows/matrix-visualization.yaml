@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v3
 
   final-job:
-    needs: [second-job,third-job,fourth-job,fifth-job]
+    needs: [matrix-job]
     name: Final Job
     runs-on: ubuntu-latest
     steps:
