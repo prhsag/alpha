@@ -20,7 +20,7 @@ const groupFailedTest = testData.test_groups.filter((group) =>
   group.test_cases.some((testCase) => testCase.status === "Fail")
 );
 
-const indivudalFailedTest = testData.individual_test_cases.filter(
+const individualFailedTest = testData.individual_test_cases.filter(
   (group) => group.status === "Fail"
 );
 
@@ -59,7 +59,7 @@ const bulkGroupTicketData = {
 };
 
 const bulkIndividualTicketData = {
-  issueUpdates: indivudalFailedTest.map((test, index) => {
+  issueUpdates: individualFailedTest.map((test, index) => {
     return {
       fields: {
         project: {
@@ -107,3 +107,5 @@ const createItracIssue = async () => {
     setFailed((error as Error)?.message ?? "Unknown error");
   }
 };
+
+createItracIssue()
