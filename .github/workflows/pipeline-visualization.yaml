@@ -17,4 +17,14 @@ jobs:
     needs: first-job
     name: Second Job
     uses: prhsag/alpha/.github/workflows/reusable-workflow-visualization.yaml@main
+  third-job:
+    needs: first-job
+    name: Third Job
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display command
+        run: |
+          echo "A third job has run"
+
 
