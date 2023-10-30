@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+  
+  second-job:
+    name: Second Job
+    uses: prhsag/alpha/.github/workflows/reusable-workflow-visualization.yaml@main
 
-      - name: Reuse another workflow
-        uses: prhsag/alpha/.github/workflows/reusable-workflow-visualization.yaml@main
