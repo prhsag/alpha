@@ -1,0 +1,36 @@
+name: Matrix visualization
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  first-job:
+    name: First Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+  
+  matrix-job:
+    needs: [first-job]
+    name: Matrix Jobs
+    strategy:
+      matrix:
+        version: [1,2,3]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+  final-job:
+    needs: [second-job,third-job,fourth-job,fifth-job]
+    name: Final Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display command
+        run: |
+          echo "The workflow has ended"
+
+
