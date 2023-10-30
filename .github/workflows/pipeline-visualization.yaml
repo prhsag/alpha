@@ -28,7 +28,7 @@ jobs:
         run: |
           echo "A third job has run"
   final-job:
-    needs: [second-job,third-job]
+    needs: [third-job]
     name: Final Job
 
     runs-on: ubuntu-latest
