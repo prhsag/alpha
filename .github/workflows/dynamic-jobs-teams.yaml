@@ -1,12 +1,12 @@
-name: Dynamic Jobs for Each Team
+name: Dynamic Jobs using Matrix
 
 on:
   workflow_dispatch:
     inputs:
-      input-teams:
-        description: 'Input Teams (CSV)'
-        type: string
+      number_of_jobs:
+        description: 'Enter the number of jobs'
         required: true
+        type: number
 
 jobs:
   create-dynamic-workflows:
@@ -19,14 +19,24 @@ jobs:
       - name: Create dynamic matrix
         id: dynamic-matrix
         run: |
-          job_count="${{ github.event.inputs.number-of-teams }}"
-          matrix_list=""
+          # Define the upper limit (integer)
+          integer="${{ github.event.inputs.number_of_jobs }}"
+    
+          # Create an array with a sequence of numbers from 1 to the specified integer
+          array=($(seq 1 $integer))
 
-          for i in $(seq 1 $job_count); do
-            matrix_list="${matrix_list} os${i}=ubuntu-latest version${i}=${i} "
+          result="["
+
+          for item in "${array[@]}"; do
+            result+="$item,"
           done
 
-          echo "matrix=$matrix_list" >> $GITHUB_OUTPUT
+          # Remove the trailing comma
+          result="${result%,}"
+
+          result+="]"
+
+          echo "$result"
         shell: bash
         
   build:
