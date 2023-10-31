@@ -55,7 +55,7 @@ jobs:
     steps:
       - name: Run Dynamic Job ${{ matrix.job-number }}
         run: |
-          echo ${{ needs.create-dynamic-workflows.outputs.MATRIX }}
+          echo ${{ needs.create-dynamic-workflows.outputs.matrix_list }}
 
         
   
