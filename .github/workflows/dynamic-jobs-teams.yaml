@@ -28,16 +28,11 @@ jobs:
           # Create an array with a sequence of numbers from 1 to the specified integer
           array=($(seq 1 $integer))
 
-          result="["
+          # Enclose each element in double quotes and join them with commas
+          result=$(printf '"%s",' "${array[@]}")
 
-          for item in "${array[@]}"; do
-            result+="$item,"
-          done
-
-          # Remove the trailing comma
-          result="${result%,}"
-
-          result+="]"
+          # Remove the trailing comma and wrap the entire string in square brackets
+          result="[$(echo "${result%,}")]"
 
           echo $result
 
@@ -50,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        job-number: ${{ needs.create-dynamic-workflows.outputs.matrix_list }}
+        job-number: ${{ fromJson(needs.create-dynamic-workflows.outputs.matrix_list) }}
 
     steps:
       - name: Run Dynamic Job ${{ matrix.job-number }}
