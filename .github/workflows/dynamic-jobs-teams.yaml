@@ -39,7 +39,7 @@ jobs:
 
           result+="]"
 
-          echo 
+          echo $result
 
           echo "MATRIX=$result" >> $GITHUB_OUTPUT
         shell: bash
