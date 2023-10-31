@@ -39,10 +39,13 @@ jobs:
 
           result+="]"
 
+          echo 
+
           echo "MATRIX=$result" >> $GITHUB_OUTPUT
         shell: bash
 
   run-dynamic-jobs:
+    needs: create-dynamic-workflows
     name: Run Dynamic Jobs
     runs-on: ubuntu-latest
     strategy:
