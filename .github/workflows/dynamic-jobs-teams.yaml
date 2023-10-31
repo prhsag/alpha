@@ -48,14 +48,15 @@ jobs:
     needs: create-dynamic-workflows
     name: Run Dynamic Jobs
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix: 
-    #     job-number: 
+    strategy:
+      matrix: 
+        job-number: ${{ needs.create-dynamic-workflows.outputs.matrix_list }}
 
     steps:
       - name: Run Dynamic Job ${{ matrix.job-number }}
         run: |
-          echo ${{ needs.create-dynamic-workflows.outputs.matrix_list }}
+          echo "Running job ${{ matrix.job-number }}"
+          # Add your job logic here
 
         
   
