@@ -39,17 +39,7 @@ jobs:
           echo "$result"
         shell: bash
         
-  build:
-    needs: create-dynamic-jobs
-    
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Build and test
-        run: |
-          echo "Running job version \"**some version**\" on \"**some os**\""
-          # Your build and test commands for each job
+  
 
     
 
