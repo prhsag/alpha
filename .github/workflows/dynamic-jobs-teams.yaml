@@ -53,6 +53,15 @@ jobs:
           echo "Running job ${{ matrix.job-number }}"
           # Add your job logic here
 
+  final-job:
+    needs: [run-dynamic-jobs]
+    name: Final Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display command
+        run: |
+          echo "The workflow has ended"
+
         
   
 
