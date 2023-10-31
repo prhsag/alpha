@@ -10,7 +10,10 @@ on:
 
 jobs:
   create-dynamic-workflows:
+    name: Create Matrix for dynamic jobs
     runs-on: ubuntu-latest
+    outputs:
+      matrix_list: ${{ steps.dynamic-matrix.outputs.MATRIX }}
 
     steps:
       - name: Checkout code
@@ -36,8 +39,22 @@ jobs:
 
           result+="]"
 
-          echo "$result"
+          echo "MATRIX=$result" >> $GITHUB_OUTPUT
         shell: bash
+
+  run-dynamic-jobs:
+    name: Run Dynamic Jobs
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        job-number: ${{ needs.create-dynamic-workflows.outputs.MATRIX }}
+
+    steps:
+      - name: Run Dynamic Job ${{ matrix.job-number }}
+        run: |
+          echo "Running job ${{ matrix.job-number }}"
+          # Add your job logic here
+
         
   
 
