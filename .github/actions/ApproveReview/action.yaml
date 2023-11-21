@@ -1,19 +1,5 @@
-name: Create PR using GitHub REST API
-description: Actiob to create PR from inputs
-
-inputs:
-  base-branch:
-    description: 'Base branch'
-    required: false
-  main-branch:
-    description: 'Main branch'
-    required: false
-  pull-request-title:
-    description: 'Pull Request Title'
-    required: true
-  pull-request-body:
-    description: 'Pull Request Body'
-    required: true
+name: Create Issue if NOGO and notify teams
+description: Actiob to create an issues if a review is NOGO and notify teams
 
 runs:
   using: node20
