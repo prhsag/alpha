@@ -1,0 +1,40 @@
+
+name: Create PR manually
+
+on:
+  workflow_dispatch:
+    inputs:
+      base-branch:
+        description: 'Base branch'
+        required: false
+      main-branch:
+        description: 'Main branch'
+        required: false
+      pull-request-title:
+        description: 'Pull Request Title'
+        required: true
+      pull-request-body:
+        description: 'Pull Request Body'
+        required: true
+        
+
+jobs:
+  create_issue_manually:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      issues: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create PR using REST API
+      uses: prhsag/alpha/.github/actions/ApproveReview@main
+      env:
+        TOKEN_PAT: ${{ secrets.TOKEN_PAT }}
+      with:
+        base-branch: ${{ inputs.base-branch }}
+        main-branch: ${{ inputs.main-branch }}
+        pull-request-title: ${{ inputs.pull-request-title }}
+        pull-request-body: ${{ inputs.pull-request-body }}

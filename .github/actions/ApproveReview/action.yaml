@@ -14,12 +14,6 @@ inputs:
   pull-request-body:
     description: 'Pull Request Body'
     required: true
-  assignees:
-    description: 'Assignees'
-    required: true
-  labels:
-    description: 'Labels (CSV)'
-    required: false
 
 runs:
   using: node20
