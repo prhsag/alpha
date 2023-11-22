@@ -1,52 +1,53 @@
 name: Review Step check
 
 on:
-    workflow_dispatch:
+    workflow_dispatch: 
       inputs:
           proceed:
               description: 'GO/NOGO'
               type: string
-              required: false
+              required: true
 
 jobs:
-    # get-proceed-status:
-    #     runs-on: ubuntu-latest
-    #     outputs:
-    #         proceed-status: ${{ steps.check-proceed-status.outputs.PROCEED_STATUS }}
+    get-proceed-status:
+        runs-on: ubuntu-latest
+        outputs:
+            proceed-status: ${{ steps.check-proceed-status.outputs.PROCEED_STATUS }}
     
-    #     steps:
-    #       - name: Checkout code
-    #         uses: actions/checkout@v3
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v3
     
-    #       - name: Check Proceed Status
-    #         id: check-proceed-status
-    #         run: |
-    #             if [[ "${{ github.event.inputs.proceed}}" == "true" ]]
-    #             then
-    #                 echo "Proceed Status: ${{ github.event.inputs.proceed }}"
-    #                 echo "PROCEED_STATUS=GO" >> $GITHUB_OUTPUT
-    #             else
-    #                 echo "Proceed Status: NOGO"
-    #                 echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
-    #                 exit 1
-    #             fi
-    #         #   random_number=$((RANDOM % 2))
+          - name: Check Proceed Status
+            id: check-proceed-status
+            run: |
+                if [[ "${{ github.event.inputs.proceed}}" == "true" ]]
+                then
+                    echo "Proceed Status: ${{ github.event.inputs.proceed }}"
+                    echo "PROCEED_STATUS=GO" >> $GITHUB_OUTPUT
+                else
+                    echo "Proceed Status: NOGO"
+                    echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
+                    exit 1
+                fi
+            #   random_number=$((RANDOM % 2))
     
-    #           # Use the random number to determine the output
-    #         #   if [ "$random_number" -eq 0 ]; then
-    #         #     echo "PROCEED_STATUS=GO" >> $GITHUB_OUTPUT
-    #         #   else
-    #         #     echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
-    #         #   fi
+              # Use the random number to determine the output
+            #   if [ "$random_number" -eq 0 ]; then
+            #     echo "PROCEED_STATUS=GO" >> $GITHUB_OUTPUT
+            #   else
+            #     echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
+            #   fi
 
     await-approval:
+        needs: get-proceed-status
+        if: ${{ always() && needs.get-proceed-status.result == 'failure' }}
         runs-on: ubuntu-latest
         environment: QA
         steps:
             - name: Deploy to QA
               run: |
                 echo "Deploying to QA, paused for review"        
-
 
     deploy-preprod:
         runs-on: ubuntu-latest
