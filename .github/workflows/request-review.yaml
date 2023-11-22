@@ -1,7 +1,7 @@
 name: Review Step check
 
 on:
-    workflow_dispatch: 
+  workflow_dispatch: 
       inputs:
           proceed:
               description: 'GO/NOGO'
