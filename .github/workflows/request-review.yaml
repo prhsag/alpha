@@ -5,7 +5,7 @@ on:
       inputs:
           proceed:
               description: 'GO/NOGO'
-              type: string
+              type: boolean
               required: true
 
 jobs:
