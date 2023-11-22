@@ -20,16 +20,19 @@ jobs:
     
           - name: Check Proceed Status
             id: check-proceed-status
-            run: |
-                if [[ "${{ github.event.inputs.proceed}}" == "true" ]]
-                then
-                    echo "Proceed Status: ${{ github.event.inputs.proceed }}"
-                    echo "PROCEED_STATUS=GO" >> $GITHUB_OUTPUT
-                else
-                    echo "Proceed Status: NOGO"
-                    echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
-                    exit 1
-                fi
+            uses: prhsag/QM/.github/actions/CheckProceedStatus@main
+            with:
+              proceed: ${{ github.event.inputs.proceed }}
+            # run: |
+            #     if [[ "${{ github.event.inputs.proceed}}" == "true" ]]
+            #     then
+            #         echo "Proceed Status: ${{ github.event.inputs.proceed }}"
+            #         echo "PROCEED_STATUS=GO" >> $GITHUB_OUTPUT
+            #     else
+            #         echo "Proceed Status: NOGO"
+            #         echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
+            #         exit 1
+            #     fi
             #   random_number=$((RANDOM % 2))
     
               # Use the random number to determine the output
