@@ -31,6 +31,7 @@ jobs:
             #   else
             #     echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
             #   fi
+
     deploy-qa:
         runs-on: ubuntu-latest
         environment: QA
@@ -49,7 +50,7 @@ jobs:
     deploy-preprod:
         runs-on: ubuntu-latest
         environment: PreProd
-        needs: deploy-qa
+        needs: [deploy-qa, get-proceed-status]
 
         steps:
             - name: Checkout code
