@@ -45,9 +45,6 @@ jobs:
         environment: QA
         
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
-
             - name: Deploy to QA
               run: |
                 echo "Deploying to QA, paused for review"        
