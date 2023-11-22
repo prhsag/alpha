@@ -1,11 +1,11 @@
 name: Review Step check
 
 on:
-  workflow_dispatch: 
+  workflow_call: 
       inputs:
           proceed:
               description: 'GO/NOGO'
-              type: boolean
+              type: string
               required: true
 
 jobs:
