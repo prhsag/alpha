@@ -31,11 +31,25 @@ jobs:
             #   else
             #     echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
             #   fi
-    
+    deploy-qa:
+        runs-on: ubuntu-latest
+        environment: QA
+        needs: get-proceed-status
+        if: ${{ inputs.proceed == false }}
+        
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Deploy to QA
+              run: |
+                echo "Deploying to QA, paused for review"        
+
+
     deploy-preprod:
         runs-on: ubuntu-latest
         environment: PreProd
-        needs: get-proceed-status
+        needs: deploy-qa
 
         steps:
             - name: Checkout code
@@ -45,16 +59,4 @@ jobs:
               run: |
                 echo "Deploying to PreProd"
     
-    deploy-qa:
-        runs-on: ubuntu-latest
-        environment: QA
-        needs: [deploy-preprod, get-proceed-status]
-        if: ${{ inputs.proceed == false }}
-        
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
-
-            - name: Deploy to QA
-              run: |
-                echo "Deploying to QA"
+    
