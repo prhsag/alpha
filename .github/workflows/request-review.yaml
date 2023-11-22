@@ -56,7 +56,7 @@ jobs:
     deploy-preprod:
         runs-on: ubuntu-latest
         environment: PreProd
-        # if: ${{ needs.await-approval.result == 'success' || needs.await-approval.result == 'skipped' }}
+        
         needs:  await-approval
 
         steps:
