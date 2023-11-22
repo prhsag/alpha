@@ -56,7 +56,7 @@ jobs:
     deploy-preprod:
         runs-on: ubuntu-latest
         environment: PreProd
-        needs: [deploy-qa, get-proceed-status]
+        if: ${{ needs.get-proceed-status.result == 'success' || needs.deploy-qa.result == 'success' }}
 
         steps:
             - name: Checkout code
