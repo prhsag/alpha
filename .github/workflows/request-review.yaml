@@ -22,7 +22,7 @@ jobs:
           - name: Check Proceed Status
             id: check-proceed-status
             run: |
-                if [ ${{ github.event.inputs.proceed == true }} ]
+                if [[ "${{ github.event.inputs.proceed}}" == "true" ]]
                 then
                     echo "Proceed Status: ${{ github.event.inputs.proceed }}"
                 else
