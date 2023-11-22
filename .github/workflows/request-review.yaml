@@ -23,6 +23,7 @@ jobs:
             id: check-proceed-status
             run: |
               echo "Proceed Status: ${{ github.event.inputs.proceed }}"
+              echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
               exit 1
             #   random_number=$((RANDOM % 2))
     
@@ -35,9 +36,10 @@ jobs:
 
     deploy-qa:
         runs-on: ubuntu-latest
-        environment: QA
         needs: get-proceed-status
-        if: ${{ always() && inputs.proceed == false }}
+        if: ${{ needs.get-proceed-status.outputs.proceed-status == 'NOGO'  }}
+        environment: QA
+        continue-on-error: true
         
         steps:
             - name: Checkout code
