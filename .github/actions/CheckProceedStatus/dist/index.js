@@ -26137,6 +26137,7 @@ var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
+console.log((0, core_1.getInput)('proceed'));
 if ((0, core_1.getInput)('proceed') == "true") {
     console.log(`Status is GO (${(0, core_1.getInput)('proceed')})`);
 }
