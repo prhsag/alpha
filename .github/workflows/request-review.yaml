@@ -37,7 +37,7 @@ jobs:
         runs-on: ubuntu-latest
         environment: QA
         needs: get-proceed-status
-        if: ${{ inputs.proceed == false }}
+        if: ${{ always() && inputs.proceed == false }}
         
         steps:
             - name: Checkout code
