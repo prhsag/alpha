@@ -30,9 +30,8 @@ jobs:
           - name: Check and create environment
             uses: prhsag/QM/.github/actions/CreateEnvironment@main
             env:
-              TOKEN_PAT: ${{ secrets.TOKEN_PAT }}
+              TOKEN_PAT: jkfgjfj
             
-
     await-approval:
         needs: get-proceed-status
         if: ${{ always() && needs.get-proceed-status.outputs.proceed-status == 'NOGO' }}
@@ -41,8 +40,4 @@ jobs:
         steps:
             - name: Deploy to QA
               run: |
-                echo "Deploying to QA, paused for review"        
-
-    
-    
-    
+                echo "Deploying to QA, paused for review"
