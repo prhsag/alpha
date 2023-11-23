@@ -7,6 +7,10 @@ on:
               description: 'GO/NOGO'
               type: string
               required: true
+      outputs:
+          proceed-status:
+              description: 'GO/NOGO'
+              value: ${{ jobs.get-proceed-status.outputs.proceed-status}}
 
 jobs:
     get-proceed-status:
