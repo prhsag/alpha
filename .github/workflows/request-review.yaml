@@ -52,18 +52,6 @@ jobs:
               run: |
                 echo "Deploying to QA, paused for review"        
 
-    deploy-preprod:
-        runs-on: ubuntu-latest
-        environment: PreProd
-        if: ${{ always() && (needs.await-approval.result == 'skipped' || needs.await-approval.result == 'success') }}
-        needs:  await-approval
-
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
-
-            - name: Deploy to PreProd
-              run: |
-                echo "Deploying to PreProd"
+    
     
     
