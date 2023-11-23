@@ -32,8 +32,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
 const github = __importStar(__nccwpck_require__(5438));
+const octokit = github.getOctokit(process.env.TOKEN_PAT);
 async function checkAndCreateEnvironment() {
-    const octokit = github.getOctokit(process.env.TOKEN_PAT);
     const owner = github.context.repo.owner;
     const repo = github.context.repo.repo;
     const environmentName = 'QA';
