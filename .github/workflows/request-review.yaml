@@ -1,16 +1,16 @@
 name: Review Step check
 
 on:
-  workflow_call: 
+  workflow_dispatch:  
       inputs:
           proceed:
               description: 'GO/NOGO'
-              type: string
+              type: boolean
               required: true
-      outputs:
-          proceed-status:
-              description: 'GO/NOGO'
-              value: ${{ jobs.get-proceed-status.outputs.proceed-status }}
+      # outputs:
+      #     proceed-status:
+      #         description: 'GO/NOGO'
+      #         value: ${{ jobs.get-proceed-status.outputs.proceed-status }}
 
 jobs:
     get-proceed-status:
