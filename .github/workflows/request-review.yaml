@@ -17,7 +17,6 @@ jobs:
         runs-on: ubuntu-latest
         outputs:
             proceed-status: ${{ steps.check-proceed-status.outputs.PROCEED_STATUS }}
-    
         steps:
           - name: Checkout code
             uses: actions/checkout@v3
@@ -27,6 +26,9 @@ jobs:
             uses: prhsag/QM/.github/actions/CheckProceedStatus@main
             with:
               proceed: ${{ github.event.inputs.proceed }}
+
+          - name: Display Final Output
+            run: echo ${{ steps.check-proceed-status.outputs.PROCEED_STATUS }}  
             # run: |
             #     if [[ "${{ github.event.inputs.proceed}}" == "true" ]]
             #     then
