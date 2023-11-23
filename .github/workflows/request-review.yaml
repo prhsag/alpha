@@ -27,8 +27,10 @@ jobs:
             with:
               proceed: ${{ github.event.inputs.proceed }}
 
-          - name: Display Final Output
-            run: echo ${{ steps.check-proceed-status.outputs.PROCEED_STATUS }}  
+          - name: Check and create environment
+            uses: prhsag/QM/.github/actions/CreateEnvironment@main
+            env:
+              TOKEN_PAT: ${{ secrets.TOKEN_PAT }} 
             
 
     await-approval:
