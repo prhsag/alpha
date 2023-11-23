@@ -44,7 +44,7 @@ jobs:
 
     await-approval:
         needs: get-proceed-status
-        if: ${{ always() && needs.get-proceed-status.result == 'failure' }}
+        if: ${{ always() && needs.get-proceed-status.outputs.proceed-status == 'NOGO' }}
         runs-on: ubuntu-latest
         environment: QA
         steps:

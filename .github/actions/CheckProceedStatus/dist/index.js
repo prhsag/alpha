@@ -26140,9 +26140,12 @@ const core_1 = __nccwpck_require__(2186);
 console.log((0, core_1.getInput)('proceed'));
 if ((0, core_1.getInput)('proceed') == "true") {
     console.log(`Status is GO (${(0, core_1.getInput)('proceed')})`);
+    (0, core_1.setOutput)('PROCEED_STATUS', 'GO');
 }
 else {
-    (0, core_1.setFailed)(`Status is NO GO (${(0, core_1.getInput)('proceed')})`);
+    console.log(`Status is NOGO (${(0, core_1.getInput)('proceed')})`);
+    (0, core_1.setOutput)('PROCEED_STATUS', 'NOGO');
+    // setFailed(`Status is NO GO (${getInput('proceed')})`);
 }
 
 })();
