@@ -22,31 +22,14 @@ jobs:
             uses: actions/checkout@v3
     
           - name: Check Proceed Status
-            id: check-proceed-status
+            id: check-proceed-status00
             uses: prhsag/QM/.github/actions/CheckProceedStatus@main
             with:
               proceed: ${{ github.event.inputs.proceed }}
 
           - name: Display Final Output
             run: echo ${{ steps.check-proceed-status.outputs.PROCEED_STATUS }}  
-            # run: |
-            #     if [[ "${{ github.event.inputs.proceed}}" == "true" ]]
-            #     then
-            #         echo "Proceed Status: ${{ github.event.inputs.proceed }}"
-            #         echo "PROCEED_STATUS=GO" >> $GITHUB_OUTPUT
-            #     else
-            #         echo "Proceed Status: NOGO"
-            #         echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
-            #         exit 1
-            #     fi
-            #   random_number=$((RANDOM % 2))
-    
-              # Use the random number to determine the output
-            #   if [ "$random_number" -eq 0 ]; then
-            #     echo "PROCEED_STATUS=GO" >> $GITHUB_OUTPUT
-            #   else
-            #     echo "PROCEED_STATUS=NOGO" >> $GITHUB_OUTPUT
-            #   fi
+            
 
     await-approval:
         needs: get-proceed-status
@@ -56,6 +39,7 @@ jobs:
         steps:
             - name: Deploy to QA
               run: |
+                if [ ${{  }} ]
                 echo "Deploying to QA, paused for review"        
 
     
