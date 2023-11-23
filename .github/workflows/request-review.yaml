@@ -30,7 +30,7 @@ jobs:
           - name: Check and create environment
             uses: prhsag/QM/.github/actions/CreateEnvironment@main
             env:
-              TOKEN_PAT: jkfgjfj
+              TOKEN_PAT: ${{ secrets.TOKEN_PAT }}
             
     await-approval:
         needs: get-proceed-status
