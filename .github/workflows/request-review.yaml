@@ -41,7 +41,6 @@ jobs:
         steps:
             - name: Deploy to QA
               run: |
-                if [ ${{  }} ]
                 echo "Deploying to QA, paused for review"        
 
     
