@@ -33,10 +33,10 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
 const github = __importStar(__nccwpck_require__(5438));
 const octokit = github.getOctokit(process.env.TOKEN_PAT);
+const owner = github.context.repo.owner;
+const repo = github.context.repo.repo;
+const environmentName = 'QA';
 async function checkAndCreateEnvironment() {
-    const owner = github.context.repo.owner;
-    const repo = github.context.repo.repo;
-    const environmentName = 'QA';
     try {
         // Check if the environment already exists
         const getEnvironment = await octokit.rest.repos.getEnvironment({

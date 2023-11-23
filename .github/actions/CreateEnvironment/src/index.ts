@@ -2,12 +2,11 @@ import { setFailed } from "@actions/core";
 import * as github from "@actions/github";
 
 const octokit = github.getOctokit(process.env.TOKEN_PAT as string);
+const owner = github.context.repo.owner;
+const repo = github.context.repo.repo;
+const environmentName = 'QA';
 
 async function checkAndCreateEnvironment() {
-    const owner = github.context.repo.owner;
-    const repo = github.context.repo.repo;
-    const environmentName = 'QA';
-
     try {
         // Check if the environment already exists
         const getEnvironment = await octokit.rest.repos.getEnvironment({
