@@ -14,6 +14,7 @@ async function checkAndCreateEnvironment() {
             repo,
             environment_name: environmentName,
         });
+        
 
         // If the environment exists, log a message
         console.log(`Environment "${getEnvironment.data.name}" already exists.`);
