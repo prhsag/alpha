@@ -10,7 +10,7 @@ on:
       outputs:
           proceed-status:
               description: 'GO/NOGO'
-              value: ${{ jobs.get-proceed-status.outputs.proceed-status || (jobs.await-approval.result == 'success' && jobs.get-proceed-status.outputs.proceed-status)  }}
+              value: ${{ jobs.get-proceed-status.outputs.proceed-status  }}
 
 jobs:
     get-proceed-status:

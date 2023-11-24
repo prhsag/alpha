@@ -17,6 +17,9 @@ async function checkAndCreateEnvironment() {
 
         if (getEnvironment.data.protection_rules === undefined ) throw new Error('Environment is not protected'); 
 
+        // Checking protection rules
+        console.log(`Protection rules: ${getEnvironment.data.protection_rules}`);
+
 
         // If the environment exists, log a message
         console.log(`Environment "${getEnvironment.data.name}" already exists.`);
