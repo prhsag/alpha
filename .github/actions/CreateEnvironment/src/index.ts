@@ -15,10 +15,9 @@ async function checkAndCreateEnvironment() {
             environment_name: environmentName,
         });
 
-        if (getEnvironment.data.protection_rules === undefined ) throw new Error('Environment is not protected'); 
+        if (getEnvironment.data.protection_rules?.length === 0 ) throw new Error('Environment is not protected'); 
 
-        // Checking protection rules
-        console.log(`Protection rules length: ${getEnvironment.data.protection_rules.length}`);
+        
 
 
         // If the environment exists, log a message

@@ -37,6 +37,7 @@ const owner = github.context.repo.owner;
 const repo = github.context.repo.repo;
 const environmentName = 'QA';
 async function checkAndCreateEnvironment() {
+    var _a;
     try {
         // Check if the environment already exists
         const getEnvironment = await octokit.rest.repos.getEnvironment({
@@ -44,10 +45,8 @@ async function checkAndCreateEnvironment() {
             repo,
             environment_name: environmentName,
         });
-        if (getEnvironment.data.protection_rules === undefined)
+        if (((_a = getEnvironment.data.protection_rules) === null || _a === void 0 ? void 0 : _a.length) === 0)
             throw new Error('Environment is not protected');
-        // Checking protection rules
-        console.log(`Protection rules length: ${getEnvironment.data.protection_rules.length}`);
         // If the environment exists, log a message
         console.log(`Environment "${getEnvironment.data.name}" already exists.`);
     }
