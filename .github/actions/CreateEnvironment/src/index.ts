@@ -19,8 +19,6 @@ async function checkAndCreateEnvironment() {
 
         if (getEnvironment.data.protection_rules?.length === 0 ) throw new Error('Environment is not protected'); 
 
-        
-
 
         // If the environment exists, log a message
         console.log(`Environment "${getEnvironment.data.name}" already exists.`);
@@ -32,6 +30,8 @@ async function checkAndCreateEnvironment() {
                 repo,
                 environment_name: environmentName,
                 reviewers: [{ type: 'User', id: 117630368 }],
+                prevent_self_review: true,
+
             });
 
             console.log(`Environment "${newEnvironment.data.name}" created successfully.`);
