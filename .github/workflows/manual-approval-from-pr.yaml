@@ -1,0 +1,7 @@
+name: Manual Approval from Issue Comment
+
+on:
+    workflow_dispatch: 
+        
+jobs:
+    

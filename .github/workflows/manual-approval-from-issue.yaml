@@ -1,4 +1,4 @@
-name: Manual Approval from PR
+name: Manual Approval from Issue Comment
 
 on:
     workflow_dispatch: 

@@ -57,7 +57,7 @@ async function checkAndCreateEnvironment() {
                 owner,
                 repo,
                 environment_name: environmentName,
-                reviewers: [{ type: 'User', id: 143590393 }],
+                reviewers: [{ type: 'User', id: 117630368 }],
             });
             console.log(`Environment "${newEnvironment.data.name}" created successfully.`);
         }
