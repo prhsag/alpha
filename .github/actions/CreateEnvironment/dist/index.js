@@ -45,6 +45,7 @@ async function checkAndCreateEnvironment() {
             repo,
             environment_name: environmentName,
         });
+        // if environment doesn't exist, throw an error, so that it can be caught and created in a catch block
         if (((_a = getEnvironment.data.protection_rules) === null || _a === void 0 ? void 0 : _a.length) === 0)
             throw new Error('Environment is not protected');
         // If the environment exists, log a message
