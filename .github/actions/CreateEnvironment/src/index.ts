@@ -15,8 +15,6 @@ async function checkAndCreateEnvironment() {
             environment_name: environmentName,
         });
 
-       
-
         // if environment doesn't exist, throw an error, so that it can be caught and created in a catch block
         if (getEnvironment.data.protection_rules?.length === 0 ) throw new Error('Environment is not protected'); 
 

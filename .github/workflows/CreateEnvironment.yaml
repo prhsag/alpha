@@ -1,0 +1,17 @@
+name: Create Env
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    CreateEnvironment:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+              
+            - name: Check and create environment
+              uses: prhsag/QM/.github/actions/CreateEnvironment@main
+              env:
+                TOKEN_PAT: ${{ secrets.TOKEN_PAT }}
